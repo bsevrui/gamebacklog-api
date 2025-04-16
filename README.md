@@ -2,6 +2,7 @@
 
 ## Build y Versionado
 Build: ```24```
+
 Versión: ```1.0.20.6.9```
 
 ## Descripción
