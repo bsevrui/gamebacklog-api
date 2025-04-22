@@ -32,7 +32,6 @@
 
             break;
         case "load_games_left":
-            $data = array();
             $query = mysqli_query($mysqli, "SELECT games.idgame, games.title FROM games WHERE NOT EXISTS (SELECT * FROM usersgames WHERE usersgames.gameid=games.idgame AND usersgames.userid='$userid') ORDER BY games.title ASC");
 
             while($rows = mysqli_fetch_array($query)){
