@@ -6,30 +6,30 @@ import { UpdateGameDto } from './dto/update-game.dto';
 
 @Controller('games')
 export class GamesController {
-    constructor(private gameService: GamesService) {}
+    constructor(private gamesService: GamesService) {}
 
     @Post()
     createGame(@Body() newGame: CreateGameDto) {
-        return this.gameService.createGame(newGame);
+        return this.gamesService.createGame(newGame);
     }
 
     @Get()
     getGames(): Promise<Game[]> {
-        return this.gameService.getGames();
+        return this.gamesService.getGames();
     }
 
     @Get(':id')
     getGame(@Param('id', ParseIntPipe) id: number) {
-        return this.gameService.getGame(id);
+        return this.gamesService.getGame(id);
     }
 
     @Delete(':id')
     deleteGame(@Param('id', ParseIntPipe) id: number) {
-        return this.gameService.deleteGame(id);
+        return this.gamesService.deleteGame(id);
     }
 
     @Patch(':id')
     updateGame(@Param('id', ParseIntPipe) id: number, @Body() game: UpdateGameDto) {
-        return this.gameService.updateGame(id, game);
+        return this.gamesService.updateGame(id, game);
     }
 }
