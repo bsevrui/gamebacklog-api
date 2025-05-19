@@ -16,4 +16,16 @@ export class GenresService {
     getGenres() {
         return this.genreRepository.find();
     }
+
+    getGenre(id: number) {
+        return this.genreRepository.findOne({
+            where: {
+                id: id
+            }
+        })
+    }
+
+    deleteGenre(id: number) {
+        return this.genreRepository.delete({id: id});
+    }
 }
