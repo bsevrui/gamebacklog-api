@@ -15,6 +15,7 @@ export class GenresService {
                 name: genre.name
             }
         });
+        
         if (genreFound) {
             return new HttpException('Genre already exist', HttpStatus.CONFLICT);
         } else {
