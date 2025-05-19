@@ -15,6 +15,7 @@ export class GenresService {
                 name: genre.name
             }
         });
+
         if (genreFound) {
             return new HttpException('Genre already exist', HttpStatus.CONFLICT);
         } else {
@@ -41,8 +42,14 @@ export class GenresService {
         }
     }
 
-    deleteGenre(id: number) {
-        return this.genreRepository.delete({id: id});
+    async deleteGenre(id: number) {
+        const genreFound = await this.genreRepository.delete({id: id});
+
+        if (!genreFound) {
+            return new HttpException('Genre Not Found', HttpStatus.NOT_FOUND);
+        } else {
+            return genreFound;
+        }
     }
 
     updateGenre(id: number, genre: UpdateGenreDto) {
