@@ -27,12 +27,18 @@ export class GenresService {
         return this.genreRepository.find();
     }
 
-    getGenre(id: number) {
-        return this.genreRepository.findOne({
+    async getGenre(id: number) {
+        const genreFound = await this.genreRepository.findOne({
             where: {
                 id: id
             }
         })
+
+        if (!genreFound) {
+            return new HttpException('Genre Not Found', HttpStatus.NOT_FOUND);
+        } else {
+            return genreFound;
+        }
     }
 
     deleteGenre(id: number) {
