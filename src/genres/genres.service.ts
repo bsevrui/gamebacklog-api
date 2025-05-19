@@ -55,7 +55,18 @@ export class GenresService {
         }
     }
 
-    updateGenre(id: number, genre: UpdateGenreDto) {
-        return this.genreRepository.update({id: id}, genre);
+    async updateGenre(id: number, genre: UpdateGenreDto) {
+        const genreFound = await this.genreRepository.findOne({
+            where: {
+                id: id
+            }
+        })
+
+        if (!genreFound) {
+            return new HttpException('Genre Not Found', HttpStatus.NOT_FOUND);
+        } else {
+            const updatedGenre = Object.assign(genreFound, genre);
+            return this.genreRepository.save(updatedGenre);
+        }
     }
 }
