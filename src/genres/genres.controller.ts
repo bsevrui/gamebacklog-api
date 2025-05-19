@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { CreateGenreDto } from './dto/create-genre.dto';
 import { GenresService } from './genres.service';
 
@@ -8,6 +8,11 @@ export class GenresController {
 
     @Post()
     createGenre(@Body() newGenre: CreateGenreDto) {
-        return this.genresService.createGenre(newGenre)
+        return this.genresService.createGenre(newGenre);
+    }
+
+    @Get()
+    getGenres() {
+        return this.genresService.getGenres();
     }
 }
