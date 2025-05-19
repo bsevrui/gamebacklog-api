@@ -9,7 +9,7 @@ export class GenresController {
     constructor(private genresService: GenresService) {}
 
     @Post()
-    createGenre(@Body() newGenre: CreateGenreDto): Promise<Genre> {
+    createGenre(@Body() newGenre: CreateGenreDto) {
         return this.genresService.createGenre(newGenre);
     }
 

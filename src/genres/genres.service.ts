@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Genre } from './genre.entity';
 import { Repository } from 'typeorm';
@@ -9,9 +9,18 @@ import { UpdateGenreDto } from './dto/update-genre.dto';
 export class GenresService {
     constructor(@InjectRepository(Genre) private genreRepository: Repository<Genre>) {}
 
-    createGenre(genre: CreateGenreDto) {
-        const newGenre = this.genreRepository.create(genre);
-        return this.genreRepository.save(newGenre);
+    async createGenre(genre: CreateGenreDto) {
+        const genreFound = await this.genreRepository.findOne({
+            where: {
+                name: genre.name
+            }
+        });
+        if (genreFound) {
+            return new HttpException('Genre already exist', HttpStatus.CONFLICT);
+        } else {
+            const newGenre = this.genreRepository.create(genre);
+            return this.genreRepository.save(newGenre);
+        }
     }
 
     getGenres() {
