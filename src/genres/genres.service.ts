@@ -15,7 +15,6 @@ export class GenresService {
                 name: genre.name
             }
         });
-
         if (genreFound) {
             return new HttpException('Genre already exist', HttpStatus.CONFLICT);
         } else {
@@ -25,7 +24,11 @@ export class GenresService {
     }
 
     getGenres() {
-        return this.genreRepository.find();
+        return this.genreRepository.find({
+            order: {
+                name: "ASC"
+            }
+        });
     }
 
     async getGenre(id: number) {
@@ -43,12 +46,12 @@ export class GenresService {
     }
 
     async deleteGenre(id: number) {
-        const genreFound = await this.genreRepository.delete({id: id});
-
-        if (!genreFound) {
+        const result = await this.genreRepository.delete({id: id});
+        
+        if (result.affected === 0) {
             return new HttpException('Genre Not Found', HttpStatus.NOT_FOUND);
         } else {
-            return genreFound;
+            return result;
         }
     }
 
