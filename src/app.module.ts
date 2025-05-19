@@ -1,14 +1,26 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
-import { GenresService } from './genres/genres.service';
-import { GenresController } from './genres/genres.controller';
 import { GenresModule } from './genres/genres.module';
 
 @Module({
-  imports: [UsersModule, GenresModule],
-  controllers: [AppController, GenresController],
-  providers: [AppService, GenresService],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mariadb',
+      host: 'localhost',
+      port: 3306,
+      username: 'api',
+      password: 'access4api#',
+      database: 'gamebacklog',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true
+    }),
+    UsersModule,
+    GenresModule
+  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
