@@ -18,6 +18,11 @@ export class GamesController {
         return this.gamesService.getGames();
     }
 
+    @Get('recentlyadded')
+    getRecentlyAdded(): Promise<Game[]> {
+        return this.gamesService.getRecentlyAdded();
+    }
+
     @Get(':id')
     getGame(@Param('id', ParseIntPipe) id: number) {
         return this.gamesService.getGame(id);

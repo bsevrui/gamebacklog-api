@@ -32,6 +32,15 @@ export class GamesService {
         });
     }
 
+    getRecentlyAdded() {
+        return this.gameRepository.find({
+            order: {
+                id: "DESC"
+            },
+            take: 15
+        });
+    }
+
     async getGame(id: number) {
         const gameFound = await this.gameRepository.findOne({
             where: {
