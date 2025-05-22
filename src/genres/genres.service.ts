@@ -36,8 +36,11 @@ export class GenresService {
         const genreFound = await this.genreRepository.findOne({
             where: {
                 id: id
+            },
+            relations: {
+                games: true
             }
-        })
+        });
 
         if (!genreFound) {
             return new HttpException('Genre Not Found', HttpStatus.NOT_FOUND);
