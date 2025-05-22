@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { UsersGames } from "src/usersgames/usersgames.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity({name: 'users', synchronize: false})
 export class User {
@@ -22,4 +23,7 @@ export class User {
     lastName: string;
     @Column({nullable: true, type: 'varchar', length: 255})
     profilePicture: string;
+
+    @OneToMany(() => UsersGames, usersgames => usersgames.user)
+    games: UsersGames[];
 }
