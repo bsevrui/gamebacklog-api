@@ -37,6 +37,9 @@ export class UsersService {
         const userFound = await this.userRepository.findOne({
             where: {
                 id: id
+            },
+            relations: {
+                games: true
             }
         });
 
