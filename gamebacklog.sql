@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-05-2025 a las 19:17:58
+-- Tiempo de generación: 22-05-2025 a las 16:41:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -62,18 +62,33 @@ INSERT INTO `gamegenres` (`genre`, `game`) VALUES
 (11, 317),
 (13, 84),
 (14, 113),
-(15, 47),
-(15, 241),
-(15, 283),
-(15, 305),
-(15, 306),
-(15, 307),
-(15, 310),
 (16, 335),
 (19, 11),
 (20, 4),
 (20, 221),
-(23, 341);
+(21, 90),
+(21, 242),
+(21, 244),
+(21, 390),
+(23, 341),
+(24, 174),
+(25, 393),
+(26, 302),
+(27, 394),
+(28, 68),
+(29, 371),
+(30, 396),
+(31, 395),
+(32, 25),
+(33, 240),
+(34, 123),
+(35, 341),
+(36, 393),
+(37, 367),
+(38, 350),
+(39, 353),
+(40, 268),
+(41, 397);
 
 -- --------------------------------------------------------
 
@@ -302,8 +317,7 @@ INSERT INTO `games` (`id`, `title`, `type`, `cover`) VALUES
 (214, 'Bayonetta 3', 'Game', NULL),
 (215, 'Bloodborne', 'Game', NULL),
 (216, 'Brütal Legend', 'Game', NULL),
-(217, 'Catherine Classic', 'Game', NULL),
-(218, 'Catherine', 'Game', NULL),
+(218, 'Catherine (Catherine Classic)', 'Game', NULL),
 (219, 'Catherine Full Body', 'Game', NULL),
 (220, 'Chaos on Deponia', 'Game', NULL),
 (221, 'Cyberpunk 2077', 'Game', NULL),
@@ -468,7 +482,12 @@ INSERT INTO `games` (`id`, `title`, `type`, `cover`) VALUES
 (389, 'Grand Theft Auto V [Multiplayer]', 'Game', NULL),
 (390, 'Injustice 2 [Campaign]', 'Game', NULL),
 (391, 'Injustice: God Among Us [Campaign]', 'Game', NULL),
-(392, 'Dead or Alive 5 [Campaign]', 'Game', NULL);
+(392, 'Dead or Alive 5 [Campaign]', 'Game', NULL),
+(393, 'Sifu', 'Game', NULL),
+(394, 'osu!', 'Game', NULL),
+(395, 'Monkey Island', 'Game', NULL),
+(396, 'Fahrenheit 451', 'Game', NULL),
+(397, 'Preguntados', 'Game', NULL);
 
 -- --------------------------------------------------------
 
@@ -491,19 +510,36 @@ INSERT INTO `genres` (`id`, `name`, `description`) VALUES
 (2, 'TPS', 'Third Person Shooter'),
 (3, 'RTS', 'Real Time Strategy'),
 (4, 'MOBA', 'Multiplayer Online Battle Arena'),
-(5, 'RPG', 'Role Playing Game'),
+(5, 'RPG', 'Role-playing Game'),
 (6, 'MMO', 'Massively Multiplayer Online'),
 (8, 'Action', NULL),
 (10, 'Adventure', NULL),
 (11, 'Simulation', NULL),
 (13, 'Sports', NULL),
 (14, 'Idle', NULL),
-(15, 'Survival Horror', NULL),
 (16, 'Racing', NULL),
-(19, 'JRPG', 'Japanese Role Playing Game'),
+(19, 'JRPG', 'Japanese Role-playing Game'),
 (20, 'Open World', NULL),
 (21, 'Fighter', 'Includes 2D & 3D fighting games'),
-(23, 'TBS', 'Turn-Based Strategy');
+(23, 'TBS', 'Turn-Based Strategy'),
+(24, 'Platforms', NULL),
+(25, 'Beat\'em ups', NULL),
+(26, 'Survival', NULL),
+(27, 'Rhythm', NULL),
+(28, 'Battle Royale', NULL),
+(29, 'Metroidvania', NULL),
+(30, 'Text Adventure', NULL),
+(31, 'Graphic Adventure', NULL),
+(32, 'Visual Novel', NULL),
+(33, 'Interactive Movie', NULL),
+(34, 'Puzzle', NULL),
+(35, 'CRPG', 'Computer Role-playing Game'),
+(36, 'Roguelike', NULL),
+(37, 'Gacha', NULL),
+(38, 'Stealth', NULL),
+(39, 'Horror', NULL),
+(40, 'Party', NULL),
+(41, 'Trivia', NULL);
 
 -- --------------------------------------------------------
 
@@ -1069,13 +1105,13 @@ ALTER TABLE `usersgames`
 -- AUTO_INCREMENT de la tabla `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=393;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=398;
 
 --
 -- AUTO_INCREMENT de la tabla `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `platforms`
