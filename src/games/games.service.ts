@@ -1,13 +1,16 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Game } from './game.entity';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
 
 @Injectable()
 export class GamesService {
-    constructor(@InjectRepository(Game) private gameRepository: Repository<Game>) {}
+    constructor(
+        @InjectRepository(Game) private gameRepository: Repository<Game>,
+        private readonly dataSource: DataSource
+    ) {}
 
     async createGame(game: CreateGameDto) {
         const gameFound = await this.gameRepository.findOne({
@@ -39,6 +42,11 @@ export class GamesService {
             },
             take: 20
         });
+    }
+
+    async getTopRated(): Promise<any> {
+        const result = await this.dataSource.query(`SELECT games.id, games.title, games.type, games.cover, ROUND(AVG(usersgames.score), 2) AS averagescore FROM games LEFT JOIN usersgames ON games.id = usersgames.gameId GROUP BY games.title ORDER BY ROUND(AVG(usersgames.score), 2) DESC, games.title ASC LIMIT 20`);
+        return result;
     }
 
     async getGame(id: number) {
