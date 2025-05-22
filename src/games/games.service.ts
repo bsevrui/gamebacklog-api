@@ -37,7 +37,7 @@ export class GamesService {
             order: {
                 id: "DESC"
             },
-            take: 15
+            take: 20
         });
     }
 
