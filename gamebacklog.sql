@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-05-2025 a las 16:41:31
+-- Tiempo de generación: 22-05-2025 a las 18:30:36
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -550,7 +550,7 @@ INSERT INTO `genres` (`id`, `name`, `description`) VALUES
 CREATE TABLE `platforms` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `release_date` date NOT NULL,
+  `releaseDate` date NOT NULL,
   `detail` varchar(255) DEFAULT NULL,
   `picture` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -559,7 +559,7 @@ CREATE TABLE `platforms` (
 -- Volcado de datos para la tabla `platforms`
 --
 
-INSERT INTO `platforms` (`id`, `name`, `release_date`, `detail`, `picture`) VALUES
+INSERT INTO `platforms` (`id`, `name`, `releaseDate`, `detail`, `picture`) VALUES
 (1, 'Sony\'s PlayStation 4 Family', '2014-02-22', 'Includes: PlayStation 4, PlayStation 4 Slim & PlayStation 4 Pro', NULL),
 (2, 'Microsoft\'s Windows', '1985-11-20', 'Includes all versions of Microsoft\'s Windows', NULL),
 (3, 'Microsoft\'s Xbox One Family', '2013-11-22', 'Includes: Xbox One, Xbox One S & Xbox One X', NULL),
@@ -596,16 +596,16 @@ INSERT INTO `platforms` (`id`, `name`, `release_date`, `detail`, `picture`) VALU
 --
 
 CREATE TABLE `platformsgames` (
-  `platform` int(11) NOT NULL,
-  `game` int(11) NOT NULL,
-  `release_date` date NOT NULL DEFAULT current_timestamp()
+  `platformId` int(11) NOT NULL,
+  `gameId` int(11) NOT NULL,
+  `releaseDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `platformsgames`
 --
 
-INSERT INTO `platformsgames` (`platform`, `game`, `release_date`) VALUES
+INSERT INTO `platformsgames` (`platformId`, `gameId`, `releaseDate`) VALUES
 (1, 1, '2019-09-06'),
 (1, 2, '2017-02-23'),
 (1, 8, '2020-02-18'),
@@ -695,19 +695,20 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(120) NOT NULL,
   `role` enum('ADMIN','USER') NOT NULL DEFAULT 'USER',
-  `registrationdate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `registrationDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `birthdate` date NOT NULL,
-  `first_name` varchar(75) DEFAULT NULL,
-  `last_name` varchar(100) DEFAULT NULL,
-  `profile_picture` varchar(255) DEFAULT NULL
+  `firstName` varchar(75) DEFAULT NULL,
+  `lastName` varchar(100) DEFAULT NULL,
+  `profilePicture` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `username`, `password`, `role`, `registrationdate`, `birthdate`, `first_name`, `last_name`, `profile_picture`) VALUES
-(1, 'prueba@prueba.com', 'saltman', '25f9e794323b453885f5181f1b624d0b', 'USER', '2020-05-10 11:46:04', '1999-02-23', 'Borja', 'Sevilla', NULL);
+INSERT INTO `users` (`id`, `email`, `username`, `password`, `role`, `registrationDate`, `birthdate`, `firstName`, `lastName`, `profilePicture`) VALUES
+(1, 'prueba@prueba.com', 'saltman', '25f9e794323b453885f5181f1b624d0b', 'USER', '2020-05-10 11:46:04', '1999-02-23', 'Borja', 'Sevilla', NULL),
+(13, 'pruebados@prueba.com', 'prueba2', 'prueba2', 'USER', '2025-05-22 16:23:17', '2025-05-22', 'prueba', 'dos', NULL);
 
 -- --------------------------------------------------------
 
@@ -716,8 +717,8 @@ INSERT INTO `users` (`id`, `email`, `username`, `password`, `role`, `registratio
 --
 
 CREATE TABLE `usersgames` (
-  `user` int(11) NOT NULL,
-  `game` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `gameId` int(11) NOT NULL,
   `status` enum('Played','Playing','Completed','Dropped','On-Hold','Plan-To-Play') NOT NULL,
   `score` int(11) DEFAULT NULL,
   `installed` tinyint(1) NOT NULL DEFAULT 0,
@@ -728,7 +729,7 @@ CREATE TABLE `usersgames` (
 -- Volcado de datos para la tabla `usersgames`
 --
 
-INSERT INTO `usersgames` (`user`, `game`, `status`, `score`, `installed`, `platinum`) VALUES
+INSERT INTO `usersgames` (`userId`, `gameId`, `status`, `score`, `installed`, `platinum`) VALUES
 (1, 1, 'Playing', 8, 1, 0),
 (1, 2, 'Completed', 9, 0, 0),
 (1, 3, 'Completed', 8, 0, 0),
@@ -1040,7 +1041,8 @@ INSERT INTO `usersgames` (`user`, `game`, `status`, `score`, `installed`, `plati
 (1, 381, 'Played', 5, 1, 0),
 (1, 382, 'Completed', 7, 0, 0),
 (1, 383, 'On-Hold', 0, 0, 0),
-(1, 386, 'Played', 7, 0, 0);
+(1, 386, 'Played', 7, 0, 0),
+(13, 1, 'Dropped', NULL, 0, 0);
 
 --
 -- Índices para tablas volcadas
@@ -1051,8 +1053,8 @@ INSERT INTO `usersgames` (`user`, `game`, `status`, `score`, `installed`, `plati
 --
 ALTER TABLE `gamegenres`
   ADD PRIMARY KEY (`genre`,`game`),
-  ADD UNIQUE KEY `genreid` (`genre`,`game`),
-  ADD KEY `Gameid` (`game`);
+  ADD KEY `IDX_a1fd1e1c180b48bc570adb51fe` (`genre`),
+  ADD KEY `IDX_effb0e1bb08f2dd7cda81942a6` (`game`);
 
 --
 -- Indices de la tabla `games`
@@ -1079,9 +1081,9 @@ ALTER TABLE `platforms`
 -- Indices de la tabla `platformsgames`
 --
 ALTER TABLE `platformsgames`
-  ADD PRIMARY KEY (`platform`,`game`),
-  ADD UNIQUE KEY `platformid` (`platform`,`game`),
-  ADD KEY `gameId` (`game`);
+  ADD PRIMARY KEY (`platformId`,`gameId`),
+  ADD UNIQUE KEY `platformid` (`platformId`,`gameId`),
+  ADD KEY `gameId` (`gameId`);
 
 --
 -- Indices de la tabla `users`
@@ -1094,8 +1096,8 @@ ALTER TABLE `users`
 -- Indices de la tabla `usersgames`
 --
 ALTER TABLE `usersgames`
-  ADD PRIMARY KEY (`user`,`game`),
-  ADD KEY `gameid` (`game`);
+  ADD PRIMARY KEY (`userId`,`gameId`),
+  ADD KEY `gameid` (`gameId`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -1123,7 +1125,7 @@ ALTER TABLE `platforms`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas
@@ -1133,22 +1135,22 @@ ALTER TABLE `users`
 -- Filtros para la tabla `gamegenres`
 --
 ALTER TABLE `gamegenres`
-  ADD CONSTRAINT `gamegenres_ibfk_1` FOREIGN KEY (`genre`) REFERENCES `genres` (`id`),
-  ADD CONSTRAINT `gamegenres_ibfk_2` FOREIGN KEY (`game`) REFERENCES `games` (`id`);
+  ADD CONSTRAINT `FK_a1fd1e1c180b48bc570adb51fe9` FOREIGN KEY (`genre`) REFERENCES `genres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_effb0e1bb08f2dd7cda81942a66` FOREIGN KEY (`game`) REFERENCES `games` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `platformsgames`
 --
 ALTER TABLE `platformsgames`
-  ADD CONSTRAINT `platformsgames_ibfk_1` FOREIGN KEY (`platform`) REFERENCES `platforms` (`id`),
-  ADD CONSTRAINT `platformsgames_ibfk_2` FOREIGN KEY (`game`) REFERENCES `games` (`id`);
+  ADD CONSTRAINT `platformsgames_ibfk_1` FOREIGN KEY (`platformId`) REFERENCES `platforms` (`id`),
+  ADD CONSTRAINT `platformsgames_ibfk_2` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`);
 
 --
 -- Filtros para la tabla `usersgames`
 --
 ALTER TABLE `usersgames`
-  ADD CONSTRAINT `usersgames_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `usersgames_ibfk_2` FOREIGN KEY (`game`) REFERENCES `games` (`id`);
+  ADD CONSTRAINT `usersgames_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `usersgames_ibfk_2` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
