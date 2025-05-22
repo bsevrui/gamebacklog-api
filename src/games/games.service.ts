@@ -59,6 +59,22 @@ export class GamesService {
             .getRawMany();
     }
 
+    async getMostPopular(): Promise<any> {
+        return this.gameRepository.createQueryBuilder('games')
+            .leftJoin('games.users', 'usersgames')
+            .select('games.id', 'id')
+            .addSelect('games.title', 'title')
+            .addSelect('games.cover', 'cover')
+            .addSelect('COUNT(usersgames.gameId)', 'popularity')
+            .groupBy('games.id')
+            .addGroupBy('games.title')
+            .addGroupBy('games.cover')
+            .orderBy('COUNT(usersgames.gameId)', 'DESC')
+            .addOrderBy('games.title', 'ASC')
+            .limit(20)
+            .getRawMany();
+    }
+
     async getGame(id: number) {
         const gameFound = await this.gameRepository.findOne({
             where: {
