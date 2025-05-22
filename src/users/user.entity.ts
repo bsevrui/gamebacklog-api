@@ -3,23 +3,23 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
 @Entity({name: 'users', synchronize: false})
 export class User {
     @PrimaryGeneratedColumn()
-    id: number
+    id: number;
     @Column({unique: true, type: 'varchar', length: 100})
-    email: string
+    email: string;
     @Column({unique: true, type: 'varchar', length: 50})
-    username: string
+    username: string;
     @Column({type: 'varchar', length: 120})
-    password: string
+    password: string;
     @Column({type: 'enum', enum: ['ADMIN', 'USER'], default: 'USER'})
-    role: string
+    role: string;
     @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-    registrationdate: Date
+    registrationdate: Date;
     @Column({type: 'date'})
-    birthdate: Date
+    birthdate: Date;
     @Column({nullable: true, type: 'varchar', length: 75})
-    first_name: string
+    first_name: string;
     @Column({nullable: true, type: 'varchar', length: 100})
-    last_name: string
+    last_name: string;
     @Column({nullable: true, type: 'varchar', length: 255})
-    profile_picture: string
+    profile_picture: string;
 }
