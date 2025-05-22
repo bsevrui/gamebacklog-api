@@ -1,13 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Genre } from "src/genres/genre.entity";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from "typeorm";
 
 @Entity({name: 'games', synchronize: false})
 export class Game {
     @PrimaryGeneratedColumn()
-    id: number
+    id: number;
     @Column({unique: true, type: 'varchar', length: 255})
-    title: string
+    title: string;
     @Column({type: 'enum', enum: ['Game', 'DLC/Expansion'], default: 'Game'})
     type: string
     @Column({nullable: true, type: 'varchar', length: 255})
-    cover: string
+    cover: string;
+
+    @ManyToMany(() => Genre, (genre) => genre.games)
+    genres: Genre[];
 }

@@ -45,6 +45,9 @@ export class GamesService {
         const gameFound = await this.gameRepository.findOne({
             where: {
                 id: id
+            },
+            relations: {
+                genres: true,
             }
         });
 
