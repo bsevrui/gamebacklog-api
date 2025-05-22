@@ -1,16 +1,13 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Game } from './game.entity';
-import { DataSource, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
 
 @Injectable()
 export class GamesService {
-    constructor(
-        @InjectRepository(Game) private gameRepository: Repository<Game>,
-        private readonly dataSource: DataSource
-    ) {}
+    constructor(@InjectRepository(Game) private gameRepository: Repository<Game>) {}
 
     async createGame(game: CreateGameDto) {
         const gameFound = await this.gameRepository.findOne({
@@ -45,8 +42,21 @@ export class GamesService {
     }
 
     async getTopRated(): Promise<any> {
-        const result = await this.dataSource.query(`SELECT games.id, games.title, games.type, games.cover, ROUND(AVG(usersgames.score), 2) AS averagescore FROM games LEFT JOIN usersgames ON games.id = usersgames.gameId GROUP BY games.title ORDER BY ROUND(AVG(usersgames.score), 2) DESC, games.title ASC LIMIT 20`);
-        return result;
+        return this.gameRepository.createQueryBuilder('games')
+            .leftJoin('games.users', 'usersgames')
+            .select('games.id', 'id')
+            .addSelect('games.title', 'title')
+            .addSelect('games.type', 'type')
+            .addSelect('games.cover', 'cover')
+            .addSelect('ROUND(AVG(usersgames.score), 2)', 'averageScore')
+            .groupBy('games.id')
+            .addGroupBy('games.title')
+            .addGroupBy('games.type')
+            .addGroupBy('games.cover')
+            .orderBy('ROUND(AVG(usersgames.score), 2)', 'DESC')
+            .addOrderBy('games.title', 'ASC')
+            .limit(20)
+            .getRawMany();
     }
 
     async getGame(id: number) {
