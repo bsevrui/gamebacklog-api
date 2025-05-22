@@ -47,7 +47,7 @@ export class GamesService {
                 id: id
             },
             relations: {
-                genres: true,
+                genres: true
             }
         });
 
