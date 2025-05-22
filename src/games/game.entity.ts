@@ -1,5 +1,6 @@
 import { Genre } from "src/genres/genre.entity";
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from "typeorm";
+import { PlatformsGames } from "src/platformsgames/platformsgames.entity";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany } from "typeorm";
 
 @Entity({name: 'games', synchronize: false})
 export class Game {
@@ -14,4 +15,7 @@ export class Game {
 
     @ManyToMany(() => Genre, (genre) => genre.games)
     genres: Genre[];
+
+    @OneToMany(() => PlatformsGames, platformsgames => platformsgames.game)
+    platforms: PlatformsGames[];
 }
