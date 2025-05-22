@@ -1,3 +1,15 @@
+# GameBacklog API
+
+## Versionado
+Versión: ```0.0.25.5.22```
+
+## Descripción
+API Diseñada para el PFG de DAW, construida en _NestJS_
+
+
+
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
