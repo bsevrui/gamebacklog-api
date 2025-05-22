@@ -13,13 +13,13 @@ export class User {
     @Column({type: 'enum', enum: ['ADMIN', 'USER'], default: 'USER'})
     role: string;
     @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-    registrationdate: Date;
+    registrationDate: Date;
     @Column({type: 'date'})
     birthdate: Date;
     @Column({nullable: true, type: 'varchar', length: 75})
-    first_name: string;
+    firstName: string;
     @Column({nullable: true, type: 'varchar', length: 100})
-    last_name: string;
+    lastName: string;
     @Column({nullable: true, type: 'varchar', length: 255})
-    profile_picture: string;
+    profilePicture: string;
 }

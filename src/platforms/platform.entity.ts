@@ -8,7 +8,7 @@ export class Platform {
     @Column({unique: true, type: 'varchar', length: 100})
     name: string;
     @Column({type: 'date'})
-    release_date: Date;
+    releaseDate: Date;
     @Column({nullable: true, type: 'varchar', length: 255})
     detail: string;
     @Column({nullable: true, type: 'varchar', length: 255})

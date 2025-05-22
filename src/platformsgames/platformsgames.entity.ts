@@ -9,7 +9,7 @@ export class PlatformsGames {
     @PrimaryColumn()
     gameId: number;
     @Column({type: 'date'})
-    release_date: Date;
+    releaseDate: Date;
 
     @ManyToOne(() => Platform, platform => platform.games, { onDelete: 'CASCADE' })
     @JoinColumn({name: 'platformId'})
