@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { PlatformsGames } from "src/platformsgames/platformsgames.entity";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
 @Entity({name: 'platforms', synchronize: false})
 export class Platform {
@@ -12,4 +13,7 @@ export class Platform {
     detail: string;
     @Column({nullable: true, type: 'varchar', length: 255})
     picture: string;
+
+    @OneToMany(() => PlatformsGames, platformsgames => platformsgames.platform)
+    games: PlatformsGames[]
 }

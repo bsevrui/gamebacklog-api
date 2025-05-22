@@ -36,6 +36,9 @@ export class PlatformsService {
         const platformFound = await this.platformRepository.findOne({
             where: {
                 id: id
+            },
+            relations: {
+                games: true
             }
         });
 
