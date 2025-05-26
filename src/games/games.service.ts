@@ -76,27 +76,6 @@ export class GamesService {
             .getRawMany();
     }
 
-    async getGamesByPlatform(platformId: number): Promise<any> {
-        const result = this.gameRepository.createQueryBuilder('games')
-            .leftJoinAndSelect('games.platforms', 'pg')
-            .where('pg.platformId = :platformId', { platformId })
-            .select([
-                'games.id AS id',
-                'games.title AS title',
-                'games.type AS type',
-                'games.cover AS cover',
-                'pg.releaseDate AS releaseDate',
-            ])
-            .orderBy('games.title', 'ASC')
-            .getRawMany();
-        return (await result).map(games => ({
-            ...games,
-            releaseDate: games.releaseDate
-                ? format(new Date(games.releaseDate), 'yyyy-MM-dd')
-                : null,
-        }));
-    }
-
     async getGame(id: number) {
         const gameFound = await this.gameRepository.findOne({
             where: {
@@ -104,7 +83,9 @@ export class GamesService {
             },
             relations: {
                 genres: true,
-                platforms: true
+                platforms: {
+                    platform: true
+                }
             }
         });
 
