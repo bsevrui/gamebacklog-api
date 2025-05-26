@@ -4,6 +4,7 @@ import { Game } from './game.entity';
 import { Repository } from 'typeorm';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
+import { format } from 'date-fns';
 
 @Injectable()
 export class GamesService {
@@ -76,7 +77,7 @@ export class GamesService {
     }
 
     async getGamesByPlatform(platformId: number): Promise<any> {
-        return this.gameRepository.createQueryBuilder('games')
+        const result = this.gameRepository.createQueryBuilder('games')
             .leftJoinAndSelect('games.platforms', 'pg')
             .where('pg.platformId = :platformId', { platformId })
             .select([
@@ -88,6 +89,12 @@ export class GamesService {
             ])
             .orderBy('games.title', 'ASC')
             .getRawMany();
+        return (await result).map(games => ({
+            ...games,
+            releaseDate: games.releaseDate
+                ? format(new Date(games.releaseDate), 'yyyy-MM-dd')
+                : null,
+        }));
     }
 
     async getGame(id: number) {
