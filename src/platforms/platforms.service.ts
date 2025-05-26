@@ -38,7 +38,9 @@ export class PlatformsService {
                 id: id
             },
             relations: {
-                games: true
+                games: {
+                    game: true
+                }
             }
         });
 
