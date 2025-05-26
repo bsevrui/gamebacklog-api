@@ -33,11 +33,6 @@ export class GamesController {
         return this.gamesService.getMostPopular();
     }
 
-    @Get('byplatform/:id')
-    getGamesByPlatform(@Param('id', ParseIntPipe) id: number) {
-        return this.gamesService.getGamesByPlatform(id);
-    }
-
     @Get(':id')
     getGame(@Param('id', ParseIntPipe) id: number) {
         return this.gamesService.getGame(id);
