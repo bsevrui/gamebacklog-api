@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { GenresModule } from './genres/genres.module';
 import { GamesModule } from './games/games.module';
 import { PlatformsModule } from './platforms/platforms.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { PlatformsModule } from './platforms/platforms.module';
     UsersModule,
     GenresModule,
     GamesModule,
-    PlatformsModule
+    PlatformsModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
