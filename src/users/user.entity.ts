@@ -1,5 +1,6 @@
 import { UsersGames } from "src/usersgames/usersgames.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Exclude } from "class-transformer";
 
 @Entity({name: 'users', synchronize: false})
 export class User {
@@ -10,6 +11,7 @@ export class User {
     @Column({unique: true, type: 'varchar', length: 50})
     username: string;
     @Column({type: 'varchar', length: 255})
+    @Exclude()
     password: string;
     @Column({type: 'enum', enum: ['ADMIN', 'USER'], default: 'USER'})
     role: string;

@@ -4,6 +4,7 @@ import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { instanceToPlain } from 'class-transformer';
 
 @Injectable()
 export class UsersService {
@@ -26,11 +27,13 @@ export class UsersService {
     }
 
     getUsers() {
-        return this.userRepository.find({
+        const users = this.userRepository.find({
             order: {
                 username: "ASC"
             }
         });
+
+        return instanceToPlain(users);
     }
 
     async getUser(id: number) {
@@ -46,7 +49,7 @@ export class UsersService {
         if (!userFound) {
             return new HttpException('User Not Found', HttpStatus.NOT_FOUND);
         } else {
-            return userFound;
+            return instanceToPlain(userFound);
         }
     }
 
