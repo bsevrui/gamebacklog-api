@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-05-2025 a las 18:30:36
+-- Tiempo de generación: 28-05-2025 a las 19:20:45
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -630,6 +630,7 @@ INSERT INTO `platformsgames` (`platformId`, `gameId`, `releaseDate`) VALUES
 (2, 329, '1998-03-31'),
 (2, 330, '2016-10-20'),
 (2, 332, '2020-06-02'),
+(2, 341, '2023-08-03'),
 (3, 1, '2019-09-06'),
 (3, 2, '2018-06-26'),
 (3, 8, '2020-02-18'),
@@ -651,6 +652,7 @@ INSERT INTO `platformsgames` (`platformId`, `gameId`, `releaseDate`) VALUES
 (6, 278, '2005-11-23'),
 (7, 67, '2013-03-05'),
 (7, 329, '1999-03-01'),
+(7, 341, '2023-09-22'),
 (8, 23, '2005-10-24'),
 (9, 304, '2006-12-02'),
 (10, 3, '2012-11-18'),
@@ -670,7 +672,9 @@ INSERT INTO `platformsgames` (`platformId`, `gameId`, `releaseDate`) VALUES
 (16, 134, '2010-09-14'),
 (16, 326, '2012-09-18'),
 (17, 333, '2020-11-12'),
+(17, 341, '2023-09-06'),
 (18, 221, '2020-12-10'),
+(18, 341, '2023-12-07'),
 (20, 143, '2016-02-09'),
 (21, 371, '1997-03-20'),
 (22, 127, '1997-01-31'),
@@ -693,7 +697,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(120) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `role` enum('ADMIN','USER') NOT NULL DEFAULT 'USER',
   `registrationDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `birthdate` date NOT NULL,
