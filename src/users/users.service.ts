@@ -42,7 +42,9 @@ export class UsersService {
                 id: id
             },
             relations: {
-                games: true
+                games: {
+                    game: true
+                }
             }
         });
 
