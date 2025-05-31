@@ -8,32 +8,32 @@ import { AuthGuard } from '@nestjs/passport';
 export class UsersController {
     constructor(private usersService: UsersService) {}
 
-    @UseGuards(AuthGuard('jwt'))
     @Post()
+    @UseGuards(AuthGuard('jwt'))
     createUser(@Body() newUser: CreateUserDto) {
         return this.usersService.createUser(newUser)
     }
 
-    @UseGuards(AuthGuard('jwt'))
     @Get()
+    @UseGuards(AuthGuard('jwt'))
     getUsers() {
         return this.usersService.getUsers();
     }
 
-    @UseGuards(AuthGuard('jwt'))
     @Get(':id')
+    @UseGuards(AuthGuard('jwt'))
     getUser(@Param('id', ParseIntPipe) id: number) {
         return this.usersService.getUser(id);
     }
 
-    @UseGuards(AuthGuard('jwt'))
     @Delete(':id')
+    @UseGuards(AuthGuard('jwt'))
     deleteUser(@Param('id', ParseIntPipe) id: number) {
         return this.usersService.deleteUser(id);
     }
 
-    @UseGuards(AuthGuard('jwt'))
     @Patch(':id')
+    @UseGuards(AuthGuard('jwt'))
     updateUser(@Param('id', ParseIntPipe) id: number, @Body() user: UpdateUserDto) {
         return this.usersService.updateUser(id, user);
     }

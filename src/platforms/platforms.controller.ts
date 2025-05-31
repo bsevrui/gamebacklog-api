@@ -9,8 +9,8 @@ import { AuthGuard } from '@nestjs/passport';
 export class PlatformsController {
     constructor(private platformsService: PlatformsService) {}
 
-    @UseGuards(AuthGuard('jwt'))
     @Post()
+    @UseGuards(AuthGuard('jwt'))
     createPlatform(@Body() newPlatform: CreatePlatformDto) {
         return this.platformsService.createPlatform(newPlatform);
     }
@@ -25,14 +25,14 @@ export class PlatformsController {
         return this.platformsService.getPlatform(id);
     }
 
-    @UseGuards(AuthGuard('jwt'))
     @Delete(':id')
+    @UseGuards(AuthGuard('jwt'))
     deletePlatform(@Param('id', ParseIntPipe) id: number) {
         return this.platformsService.deletePlatform(id);
     }
 
-    @UseGuards(AuthGuard('jwt'))
     @Patch(':id')
+    @UseGuards(AuthGuard('jwt'))
     updatePlatform(@Param('id', ParseIntPipe) id: number, @Body() platform: UpdatePlatformDto) {
         return this.platformsService.updatePlatform(id, platform);
     }

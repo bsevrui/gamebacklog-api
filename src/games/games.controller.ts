@@ -9,8 +9,8 @@ import { AuthGuard } from '@nestjs/passport';
 export class GamesController {
     constructor(private gamesService: GamesService) {}
 
-    @UseGuards(AuthGuard('jwt'))
     @Post()
+    @UseGuards(AuthGuard('jwt'))
     createGame(@Body() newGame: CreateGameDto) {
         return this.gamesService.createGame(newGame);
     }
@@ -40,14 +40,14 @@ export class GamesController {
         return this.gamesService.getGame(id);
     }
 
-    @UseGuards(AuthGuard('jwt'))
     @Delete(':id')
+    @UseGuards(AuthGuard('jwt'))
     deleteGame(@Param('id', ParseIntPipe) id: number) {
         return this.gamesService.deleteGame(id);
     }
 
-    @UseGuards(AuthGuard('jwt'))
     @Patch(':id')
+    @UseGuards(AuthGuard('jwt'))
     updateGame(@Param('id', ParseIntPipe) id: number, @Body() game: UpdateGameDto) {
         return this.gamesService.updateGame(id, game);
     }

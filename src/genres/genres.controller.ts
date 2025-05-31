@@ -9,8 +9,8 @@ import { AuthGuard } from '@nestjs/passport';
 export class GenresController {
     constructor(private genresService: GenresService) {}
 
-    @UseGuards(AuthGuard('jwt'))
     @Post()
+    @UseGuards(AuthGuard('jwt'))
     createGenre(@Body() newGenre: CreateGenreDto) {
         return this.genresService.createGenre(newGenre);
     }
@@ -25,14 +25,14 @@ export class GenresController {
         return this.genresService.getGenre(id);
     }
 
-    @UseGuards(AuthGuard('jwt'))
     @Delete(':id')
+    @UseGuards(AuthGuard('jwt'))
     deleteGenre(@Param('id', ParseIntPipe) id: number) {
         return this.genresService.deleteGenre(id);
     }
 
-    @UseGuards(AuthGuard('jwt'))
     @Patch(':id')
+    @UseGuards(AuthGuard('jwt'))
     updateGenre(@Param('id', ParseIntPipe) id: number, @Body() genre: UpdateGenreDto) {
         return this.genresService.updateGenre(id, genre);
     }
