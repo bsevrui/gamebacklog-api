@@ -7,6 +7,7 @@ import { GenresModule } from './genres/genres.module';
 import { GamesModule } from './games/games.module';
 import { PlatformsModule } from './platforms/platforms.module';
 import { AuthModule } from './auth/auth.module';
+import { UsersgamesModule } from './usersgames/usersgames.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { AuthModule } from './auth/auth.module';
     GenresModule,
     GamesModule,
     PlatformsModule,
-    AuthModule
+    AuthModule,
+    UsersgamesModule
   ],
   controllers: [AppController],
   providers: [AppService],
