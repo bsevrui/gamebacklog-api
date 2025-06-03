@@ -47,6 +47,8 @@ export class PlatformsService {
         if (!platformFound) {
             return new HttpException('Platform Not Found', HttpStatus.NOT_FOUND);
         } else {
+            platformFound.games = platformFound.games.sort((a, b) => a.game.title.localeCompare(b.game.title));
+
             return platformFound
         }
     }
