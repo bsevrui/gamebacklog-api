@@ -8,6 +8,16 @@ import { UpdateUsersGamesDto } from './dto/update-usersgames.dto';
 export class UsersgamesService {
     constructor(@InjectRepository(UsersGames) private usersgamesRepository: Repository<UsersGames>) {}
 
+    async getOne(userId: number, gameId: number) {
+        const relation = await this.usersgamesRepository.findOneBy({ userId, gameId });
+
+        if (!relation) {
+            throw new NotFoundException('Relation not found');
+        }
+
+        return relation;
+    }
+
     async update(userId: number, gameId: number, usergame: UpdateUsersGamesDto) {
         const relation = await this.usersgamesRepository.findOneBy({ userId, gameId });
         
