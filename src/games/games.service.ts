@@ -91,6 +91,9 @@ export class GamesService {
         if (!gameFound) {
             return new HttpException('Game Not Found', HttpStatus.NOT_FOUND);
         } else {
+            gameFound.genres = gameFound.genres.sort((a, b) => a.name.localeCompare(b.name));
+            gameFound.platforms = gameFound.platforms.sort((a, b) => a.platform.name.localeCompare(b.platform.name));
+
             const stats = await this.gameRepository.createQueryBuilder('games')
                 .leftJoin('games.users', 'usersgames')
                 .select('games.id', 'id')
