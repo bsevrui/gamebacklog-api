@@ -1,4 +1,4 @@
-import { Controller, Param, ParseIntPipe, Patch, Body } from '@nestjs/common';
+import { Controller, Param, ParseIntPipe, Patch, Body, Delete } from '@nestjs/common';
 import { UsersgamesService } from './usersgames.service';
 import { UpdateUsersGamesDto } from './dto/update-usersgames.dto';
 
@@ -13,5 +13,13 @@ export class UsersgamesController {
         @Body() usergame: UpdateUsersGamesDto
     ) {
         return this.usersgamesService.update(userId, gameId, usergame);
+    }
+
+    @Delete(':userId/:gameId')
+    async delete(
+        @Param('userId', ParseIntPipe) userId: number,
+        @Param('gameId', ParseIntPipe) gameId: number
+    ) {
+        return this.usersgamesService.delete(userId, gameId);
     }
 }

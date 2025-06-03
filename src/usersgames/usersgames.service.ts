@@ -18,4 +18,14 @@ export class UsersgamesService {
         Object.assign(relation, usergame);
         return this.usersgamesRepository.save(relation);
     }
+
+    async delete(userId: number, gameId: number): Promise<void> {
+        const relation = await this.usersgamesRepository.findOneBy({ userId, gameId });
+
+        if (!relation) {
+            throw new NotFoundException('Relation not found');
+        }
+
+        await this.usersgamesRepository.remove(relation);
+    }
 }
