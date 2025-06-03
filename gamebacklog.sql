@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 01-06-2025 a las 21:58:53
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Host: localhost
+-- Generation Time: Jun 03, 2025 at 09:51 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `gamebacklog`
+-- Database: `gamebacklog`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `gamegenres`
+-- Table structure for table `gamegenres`
 --
 
 CREATE TABLE `gamegenres` (
@@ -33,7 +33,7 @@ CREATE TABLE `gamegenres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `gamegenres`
+-- Dumping data for table `gamegenres`
 --
 
 INSERT INTO `gamegenres` (`genre`, `game`) VALUES
@@ -45,19 +45,46 @@ INSERT INTO `gamegenres` (`genre`, `game`) VALUES
 (1, 73),
 (1, 78),
 (1, 158),
+(1, 288),
 (2, 23),
 (2, 133),
 (3, 329),
+(3, 372),
 (4, 91),
+(4, 372),
+(5, 57),
 (5, 66),
-(5, 278),
+(5, 247),
+(5, 249),
+(5, 284),
 (5, 341),
+(5, 398),
+(5, 399),
 (6, 75),
+(6, 227),
+(6, 228),
 (8, 55),
+(8, 57),
+(8, 227),
+(8, 228),
 (8, 244),
+(8, 247),
+(8, 249),
 (8, 262),
+(8, 284),
+(8, 288),
+(8, 398),
+(8, 399),
+(10, 57),
+(10, 227),
+(10, 228),
 (10, 240),
+(10, 247),
+(10, 249),
+(10, 284),
 (10, 341),
+(10, 398),
+(10, 399),
 (11, 278),
 (11, 317),
 (13, 84),
@@ -65,7 +92,12 @@ INSERT INTO `gamegenres` (`genre`, `game`) VALUES
 (16, 335),
 (19, 11),
 (20, 4),
+(20, 57),
 (20, 221),
+(20, 247),
+(20, 249),
+(20, 398),
+(20, 399),
 (21, 90),
 (21, 242),
 (21, 244),
@@ -88,12 +120,15 @@ INSERT INTO `gamegenres` (`genre`, `game`) VALUES
 (38, 350),
 (39, 353),
 (40, 268),
-(41, 397);
+(41, 397),
+(42, 284),
+(42, 398),
+(42, 399);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `games`
+-- Table structure for table `games`
 --
 
 CREATE TABLE `games` (
@@ -104,7 +139,7 @@ CREATE TABLE `games` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `games`
+-- Dumping data for table `games`
 --
 
 INSERT INTO `games` (`id`, `title`, `type`, `cover`) VALUES
@@ -487,12 +522,14 @@ INSERT INTO `games` (`id`, `title`, `type`, `cover`) VALUES
 (394, 'osu!', 'Game', NULL),
 (395, 'Monkey Island', 'Game', NULL),
 (396, 'Fahrenheit 451', 'Game', NULL),
-(397, 'Preguntados', 'Game', NULL);
+(397, 'Preguntados', 'Game', NULL),
+(398, 'Elden Ring', 'Game', NULL),
+(399, 'Elden Ring - Shadow of the Erdtree', 'DLC/Expansion', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `genres`
+-- Table structure for table `genres`
 --
 
 CREATE TABLE `genres` (
@@ -502,7 +539,7 @@ CREATE TABLE `genres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `genres`
+-- Dumping data for table `genres`
 --
 
 INSERT INTO `genres` (`id`, `name`, `description`) VALUES
@@ -539,12 +576,13 @@ INSERT INTO `genres` (`id`, `name`, `description`) VALUES
 (38, 'Stealth', NULL),
 (39, 'Horror', NULL),
 (40, 'Party', NULL),
-(41, 'Trivia', NULL);
+(41, 'Trivia', NULL),
+(42, 'Souls', 'Also includes Soulslike');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `platforms`
+-- Table structure for table `platforms`
 --
 
 CREATE TABLE `platforms` (
@@ -556,7 +594,7 @@ CREATE TABLE `platforms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `platforms`
+-- Dumping data for table `platforms`
 --
 
 INSERT INTO `platforms` (`id`, `name`, `releaseDate`, `detail`, `picture`) VALUES
@@ -592,7 +630,7 @@ INSERT INTO `platforms` (`id`, `name`, `releaseDate`, `detail`, `picture`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `platformsgames`
+-- Table structure for table `platformsgames`
 --
 
 CREATE TABLE `platformsgames` (
@@ -602,7 +640,7 @@ CREATE TABLE `platformsgames` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `platformsgames`
+-- Dumping data for table `platformsgames`
 --
 
 INSERT INTO `platformsgames` (`platformId`, `gameId`, `releaseDate`) VALUES
@@ -611,19 +649,34 @@ INSERT INTO `platformsgames` (`platformId`, `gameId`, `releaseDate`) VALUES
 (1, 8, '2020-02-18'),
 (1, 17, '2016-03-24'),
 (1, 19, '2017-03-28'),
+(1, 57, '2016-10-28'),
 (1, 66, '2015-05-19'),
+(1, 228, '2023-06-05'),
 (1, 244, '2019-04-23'),
+(1, 247, '2016-10-28'),
+(1, 249, '2016-10-28'),
+(1, 284, '2018-05-24'),
+(1, 288, '2020-03-20'),
 (1, 312, '2019-10-25'),
 (1, 328, '2018-03-23'),
 (1, 330, '2019-11-22'),
+(1, 398, '2022-02-25'),
+(1, 399, '2024-06-20'),
 (2, 1, '2020-01-09'),
 (2, 2, '2017-03-17'),
 (2, 3, '2012-11-20'),
 (2, 8, '2017-04-11'),
 (2, 17, '2016-03-24'),
 (2, 19, '2017-03-27'),
+(2, 57, '2011-11-11'),
 (2, 66, '2015-05-19'),
+(2, 227, '2022-06-02'),
+(2, 228, '2023-06-05'),
 (2, 244, '2019-04-23'),
+(2, 247, '2012-08-02'),
+(2, 249, '2013-02-05'),
+(2, 284, '2018-05-24'),
+(2, 288, '2020-03-20'),
 (2, 312, '2019-10-25'),
 (2, 326, '2012-09-17'),
 (2, 328, '2018-03-23'),
@@ -631,22 +684,37 @@ INSERT INTO `platformsgames` (`platformId`, `gameId`, `releaseDate`) VALUES
 (2, 330, '2016-10-20'),
 (2, 332, '2020-06-02'),
 (2, 341, '2023-08-03'),
+(2, 398, '2022-02-25'),
+(2, 399, '2024-06-20'),
 (3, 1, '2019-09-06'),
 (3, 2, '2018-06-26'),
 (3, 8, '2020-02-18'),
 (3, 17, '2016-03-24'),
 (3, 19, '2017-03-28'),
+(3, 57, '2016-10-28'),
 (3, 66, '2015-05-19'),
+(3, 228, '2023-06-05'),
 (3, 244, '2019-04-23'),
+(3, 247, '2016-10-28'),
+(3, 249, '2016-10-28'),
+(3, 284, '2018-05-24'),
+(3, 288, '2020-03-20'),
 (3, 312, '2019-10-25'),
 (3, 326, '2015-03-24'),
 (3, 328, '2018-03-23'),
 (3, 330, '2019-11-22'),
+(3, 398, '2022-02-25'),
+(3, 399, '2024-06-20'),
 (4, 48, '2013-10-12'),
 (4, 278, '2005-11-23'),
 (5, 8, '2018-02-16'),
+(5, 57, '2017-11-17'),
 (5, 66, '2019-10-15'),
 (5, 244, '2019-04-23'),
+(5, 247, '2017-11-17'),
+(5, 249, '2017-11-17'),
+(5, 284, '2018-05-24'),
+(5, 288, '2020-12-08'),
 (5, 330, '2018-11-16'),
 (6, 33, '2010-09-18'),
 (6, 278, '2005-11-23'),
@@ -660,21 +728,45 @@ INSERT INTO `platformsgames` (`platformId`, `gameId`, `releaseDate`) VALUES
 (10, 272, '2012-12-08'),
 (11, 62, '2006-12-02'),
 (12, 141, '2014-05-14'),
+(12, 227, '2022-06-02'),
+(12, 372, '2020-10-27'),
 (13, 69, '2019-10-01'),
+(13, 227, '2022-06-02'),
 (13, 330, '2018-10-04'),
+(13, 372, '2020-10-27'),
 (14, 3, '2012-10-30'),
 (14, 8, '2009-10-29'),
+(14, 57, '2011-11-11'),
 (14, 225, '2009-02-05'),
+(14, 247, '2013-02-26'),
+(14, 249, '2013-02-12'),
 (14, 326, '2012-09-18'),
 (15, 326, '2014-05-06'),
 (16, 3, '2012-10-30'),
 (16, 8, '2009-10-29'),
+(16, 57, '2011-11-11'),
 (16, 134, '2010-09-14'),
+(16, 247, '2012-06-26'),
+(16, 249, '2012-12-04'),
 (16, 326, '2012-09-18'),
+(17, 57, '2021-11-11'),
+(17, 228, '2023-06-05'),
+(17, 247, '2021-11-11'),
+(17, 249, '2021-11-11'),
+(17, 288, '2021-06-29'),
 (17, 333, '2020-11-12'),
 (17, 341, '2023-09-06'),
+(17, 398, '2022-02-25'),
+(17, 399, '2024-06-20'),
+(18, 57, '2021-11-11'),
 (18, 221, '2020-12-10'),
+(18, 228, '2023-06-05'),
+(18, 247, '2021-11-11'),
+(18, 249, '2021-11-11'),
+(18, 288, '2021-06-29'),
 (18, 341, '2023-12-07'),
+(18, 398, '2022-02-25'),
+(18, 399, '2024-06-20'),
 (20, 143, '2016-02-09'),
 (21, 371, '1997-03-20'),
 (22, 127, '1997-01-31'),
@@ -690,7 +782,7 @@ INSERT INTO `platformsgames` (`platformId`, `gameId`, `releaseDate`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -707,7 +799,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `role`, `registrationDate`, `birthdate`, `firstName`, `lastName`, `profilePicture`) VALUES
@@ -718,7 +810,7 @@ INSERT INTO `users` (`id`, `email`, `username`, `password`, `role`, `registratio
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usersgames`
+-- Table structure for table `usersgames`
 --
 
 CREATE TABLE `usersgames` (
@@ -731,19 +823,21 @@ CREATE TABLE `usersgames` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `usersgames`
+-- Dumping data for table `usersgames`
 --
 
 INSERT INTO `usersgames` (`userId`, `gameId`, `status`, `score`, `installed`, `platinum`) VALUES
-(16, 57, 'Playing', NULL, 0, 0),
+(16, 57, 'Playing', NULL, 1, 0),
 (16, 227, 'Dropped', NULL, 0, 0),
 (16, 228, 'Plan-To-Play', NULL, 0, 0),
-(16, 247, 'Completed', 8, 0, 0),
-(16, 249, 'Playing', NULL, 0, 0),
+(16, 247, 'Completed', 8, 1, 0),
+(16, 249, 'Playing', NULL, 1, 0),
 (16, 284, 'Completed', 9, 0, 0),
 (16, 288, 'On-Hold', NULL, 0, 0),
 (16, 341, 'Completed', 10, 0, 0),
 (16, 372, 'Played', 7, 0, 0),
+(16, 398, 'Completed', 9, 0, 1),
+(16, 399, 'Completed', 9, 0, 1),
 (17, 57, 'Playing', NULL, 0, 0),
 (17, 247, 'On-Hold', NULL, 0, 0),
 (17, 249, 'Plan-To-Play', NULL, 0, 0),
@@ -752,11 +846,11 @@ INSERT INTO `usersgames` (`userId`, `gameId`, `status`, `score`, `installed`, `p
 (17, 372, 'Played', 6, 0, 0);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `gamegenres`
+-- Indexes for table `gamegenres`
 --
 ALTER TABLE `gamegenres`
   ADD PRIMARY KEY (`genre`,`game`),
@@ -764,28 +858,28 @@ ALTER TABLE `gamegenres`
   ADD KEY `IDX_effb0e1bb08f2dd7cda81942a6` (`game`);
 
 --
--- Indices de la tabla `games`
+-- Indexes for table `games`
 --
 ALTER TABLE `games`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `title` (`title`);
 
 --
--- Indices de la tabla `genres`
+-- Indexes for table `genres`
 --
 ALTER TABLE `genres`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `genre` (`name`);
 
 --
--- Indices de la tabla `platforms`
+-- Indexes for table `platforms`
 --
 ALTER TABLE `platforms`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nameplatform` (`name`);
 
 --
--- Indices de la tabla `platformsgames`
+-- Indexes for table `platformsgames`
 --
 ALTER TABLE `platformsgames`
   ADD PRIMARY KEY (`platformId`,`gameId`),
@@ -793,67 +887,67 @@ ALTER TABLE `platformsgames`
   ADD KEY `gameId` (`gameId`);
 
 --
--- Indices de la tabla `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`,`username`);
 
 --
--- Indices de la tabla `usersgames`
+-- Indexes for table `usersgames`
 --
 ALTER TABLE `usersgames`
   ADD PRIMARY KEY (`userId`,`gameId`),
   ADD KEY `gameid` (`gameId`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `games`
+-- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=398;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=400;
 
 --
--- AUTO_INCREMENT de la tabla `genres`
+-- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
--- AUTO_INCREMENT de la tabla `platforms`
+-- AUTO_INCREMENT for table `platforms`
 --
 ALTER TABLE `platforms`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT de la tabla `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `gamegenres`
+-- Constraints for table `gamegenres`
 --
 ALTER TABLE `gamegenres`
   ADD CONSTRAINT `FK_a1fd1e1c180b48bc570adb51fe9` FOREIGN KEY (`genre`) REFERENCES `genres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_effb0e1bb08f2dd7cda81942a66` FOREIGN KEY (`game`) REFERENCES `games` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `platformsgames`
+-- Constraints for table `platformsgames`
 --
 ALTER TABLE `platformsgames`
   ADD CONSTRAINT `platformsgames_ibfk_1` FOREIGN KEY (`platformId`) REFERENCES `platforms` (`id`),
   ADD CONSTRAINT `platformsgames_ibfk_2` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`);
 
 --
--- Filtros para la tabla `usersgames`
+-- Constraints for table `usersgames`
 --
 ALTER TABLE `usersgames`
   ADD CONSTRAINT `usersgames_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`),
