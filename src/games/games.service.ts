@@ -91,7 +91,22 @@ export class GamesService {
         if (!gameFound) {
             return new HttpException('Game Not Found', HttpStatus.NOT_FOUND);
         } else {
-            return gameFound;
+            const stats = await this.gameRepository.createQueryBuilder('games')
+                .leftJoin('games.users', 'usersgames')
+                .select('games.id', 'id')
+                .addSelect('COUNT(usersgames.gameId)', 'popularity')
+                .addSelect('ROUND(AVG(usersgames.score), 2)', 'averageScore')
+                .where('games.id = :id', { id })
+                .groupBy('games.id')
+                .getRawOne();
+            const popularity = stats?.popularity ? parseInt(stats.popularity, 10) : 0;
+            const averageScore = stats?.averageScore ? parseFloat(stats.averageScore) : null;
+
+            return {
+                ...gameFound,
+                popularity,
+                averageScore
+            };
         }
     }
 
