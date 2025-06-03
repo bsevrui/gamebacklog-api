@@ -45,6 +45,8 @@ export class GenresService {
         if (!genreFound) {
             return new HttpException('Genre Not Found', HttpStatus.NOT_FOUND);
         } else {
+            genreFound.games = genreFound.games.sort((a, b) => a.title.localeCompare(b.title));
+
             return genreFound;
         }
     }
