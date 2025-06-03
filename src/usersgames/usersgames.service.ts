@@ -9,10 +9,10 @@ export class UsersgamesService {
     constructor(@InjectRepository(UsersGames) private usersgamesRepository: Repository<UsersGames>) {}
 
     async getOne(userId: number, gameId: number) {
-        const relation = await this.usersgamesRepository.findOneBy({ userId, gameId });
+        let relation = await this.usersgamesRepository.findOneBy({ userId, gameId });
 
         if (!relation) {
-            throw new NotFoundException('Relation not found');
+            relation = null;
         }
 
         return relation;
