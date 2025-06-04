@@ -51,6 +51,8 @@ export class UsersService {
         if (!userFound) {
             return new HttpException('User Not Found', HttpStatus.NOT_FOUND);
         } else {
+            userFound.games = userFound.games.sort((a, b) => a.game.title.localeCompare(b.game.title));
+
             return instanceToPlain(userFound);
         }
     }
