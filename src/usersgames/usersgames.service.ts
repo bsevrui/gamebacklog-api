@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UsersGames } from './usersgames.entity';
 import { Repository } from 'typeorm';
 import { UpdateUsersGamesDto } from './dto/update-usersgames.dto';
+import { CreateUsersGamesDto } from './dto/create-usersgames.dto';
 
 @Injectable()
 export class UsersgamesService {
@@ -16,6 +17,19 @@ export class UsersgamesService {
         }
 
         return relation;
+    }
+
+    async create(usergame: CreateUsersGamesDto) {
+        const { userId, gameId, status, score, installed, platinum } = usergame;
+        const alreadyCreated = await this.usersgamesRepository.findOneBy({ userId, gameId });
+
+        if (alreadyCreated) {
+            throw new Error('relation already exists');
+        }
+
+        const relation = this.usersgamesRepository.create({userId, gameId, status, score, installed, platinum});
+
+        return await this.usersgamesRepository.save(relation);
     }
 
     async update(userId: number, gameId: number, usergame: UpdateUsersGamesDto) {

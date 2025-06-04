@@ -1,7 +1,8 @@
-import { Controller, Param, ParseIntPipe, Patch, Body, Delete, Get, UseGuards } from '@nestjs/common';
+import { Controller, Param, ParseIntPipe, Patch, Body, Delete, Get, UseGuards, Post } from '@nestjs/common';
 import { UsersgamesService } from './usersgames.service';
 import { UpdateUsersGamesDto } from './dto/update-usersgames.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { CreateUsersGamesDto } from './dto/create-usersgames.dto';
 
 @Controller('usersgames')
 export class UsersgamesController {
@@ -14,6 +15,12 @@ export class UsersgamesController {
         @Param('gameId', ParseIntPipe) gameId: number
     ) {
         return this.usersgamesService.getOne(userId, gameId);
+    }
+
+    @Post()
+    @UseGuards(AuthGuard('jwt'))
+    async create(@Body() usergame: CreateUsersGamesDto) {
+        return this.usersgamesService.create(usergame);
     }
 
     @Patch(':userId/:gameId')
