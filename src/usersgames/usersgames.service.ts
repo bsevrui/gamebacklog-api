@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsersGames } from './usersgames.entity';
 import { Repository } from 'typeorm';
@@ -24,7 +24,7 @@ export class UsersgamesService {
         const alreadyCreated = await this.usersgamesRepository.findOneBy({ userId, gameId });
 
         if (alreadyCreated) {
-            throw new Error('relation already exists');
+            throw new ConflictException('relation already exist');
         }
 
         const relation = this.usersgamesRepository.create({userId, gameId, status, score, installed, platinum});
