@@ -27,7 +27,7 @@ export class AuthService {
 
         if (alreadyRegister) {
             if (alreadyRegister.email === email) {
-                throw new ConflictException('email alreay in use');
+                throw new ConflictException('email already in use');
             } else if (alreadyRegister.username === username) {
                 throw new ConflictException('username already in use');
             }
