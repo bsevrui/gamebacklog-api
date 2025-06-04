@@ -37,7 +37,7 @@ export class GamesService {
             order: {
                 id: "DESC"
             },
-            take: 20
+            take: 15
         });
     }
 
@@ -55,7 +55,7 @@ export class GamesService {
             .addGroupBy('games.cover')
             .orderBy('ROUND(AVG(usersgames.score), 2)', 'DESC')
             .addOrderBy('games.title', 'ASC')
-            .limit(20)
+            .limit(15)
             .getRawMany();
     }
 
@@ -71,7 +71,7 @@ export class GamesService {
             .addGroupBy('games.cover')
             .orderBy('COUNT(usersgames.gameId)', 'DESC')
             .addOrderBy('games.title', 'ASC')
-            .limit(20)
+            .limit(15)
             .getRawMany();
     }
 
