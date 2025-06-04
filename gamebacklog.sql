@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 03, 2025 at 09:51 PM
+-- Generation Time: Jun 04, 2025 at 11:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -804,8 +804,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `role`, `registrationDate`, `birthdate`, `firstName`, `lastName`, `profilePicture`) VALUES
 (16, 'saltman@test.com', 'saltman', '$2b$10$Ge1Gd9loGgSJzzeKqRU5e.SbCn.CFc3zvdkoU..QwDsCE.5FPv8P.', 'USER', '2025-05-28 19:00:06', '1999-02-23', NULL, NULL, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVOf-Aqlh4Szj2z4z_jTcecVgDKXdNDWefuA&s'),
-(17, 'user@test.com', 'user', '$2b$10$nrmegSAAwv40VtlN9nVvS.nUTMaeoVsZDJwkT5VagIAztvbxLbPim', 'USER', '2025-05-28 19:01:09', '2025-05-28', NULL, NULL, NULL),
-(18, 'prueba3@test.com', 'pruebatres', '$2b$10$KiTsDJ6osYZdyBu.lqiNnOEiO6ZPsZq6qD6pLZklfRof52lkiNNtG', 'USER', '2025-05-29 19:08:36', '2025-05-29', NULL, NULL, NULL);
+(17, 'user@test.com', 'user', '$2b$10$nrmegSAAwv40VtlN9nVvS.nUTMaeoVsZDJwkT5VagIAztvbxLbPim', 'USER', '2025-05-28 19:01:09', '2025-05-28', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -926,7 +925,7 @@ ALTER TABLE `platforms`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
