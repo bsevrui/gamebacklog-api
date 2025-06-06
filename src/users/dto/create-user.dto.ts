@@ -4,8 +4,8 @@ export class CreateUserDto {
     password: string
     birthdate: Date
     role?: string
-    registrationdate?: Date
-    first_name?: string
-    last_name?: string
-    profile_picture?: string
+    registrationDate?: Date
+    firstName?: string
+    lastName?: string
+    profilePicture?: string
 }
