@@ -1,6 +1,6 @@
 export class UpdatePlatformDto {
     name?: string
-    release_date?: Date
+    releaseDate?: Date
     detail?: string
     picture?: string
 }
