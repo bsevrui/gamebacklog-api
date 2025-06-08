@@ -73,8 +73,21 @@ export class PlatformsService {
         if (!platformFound) {
             return new HttpException('Platform Not Found', HttpStatus.NOT_FOUND);
         } else {
-            const updatedPlatform = Object.assign(platformFound, platform);
-            return this.platformRepository.save(updatedPlatform);
+            if (platform.name && platform.name != platformFound.name) {
+                const repeatedEntry = await this.platformRepository.findOne({
+                    where: {
+                        name: platform.name
+                    }
+                });
+
+                if (repeatedEntry) {
+                    throw new ConflictException('platform name already registered');
+                }
+
+                const updatedPlatform = Object.assign(platformFound, platform);
+
+                return this.platformRepository.save(updatedPlatform);
+            }
         }
     }
 }
