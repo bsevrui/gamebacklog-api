@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Platform } from './platform.entity';
 import { Repository } from 'typeorm';
@@ -17,7 +17,7 @@ export class PlatformsService {
         });
 
         if (platformFound) {
-            return new HttpException('Platform already exist', HttpStatus.CONFLICT);
+            throw new ConflictException('platform already registerd');
         } else {
             const newPlatform = this.platformRepository.create(platform);
             return this.platformRepository.save(newPlatform);
