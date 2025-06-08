@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Genre } from './genre.entity';
 import { Repository } from 'typeorm';
@@ -69,10 +69,23 @@ export class GenresService {
         })
 
         if (!genreFound) {
-            return new HttpException('Genre Not Found', HttpStatus.NOT_FOUND);
+            throw new HttpException('Genre not found', HttpStatus.NOT_FOUND);
         } else {
-            const updatedGenre = Object.assign(genreFound, genre);
-            return this.genreRepository.save(updatedGenre);
+            if (genre.name && genre.name != genreFound.name) {
+                const repeatedEntry = await this.genreRepository.findOne({
+                    where: {
+                        name: genre.name
+                    }
+                });
+
+                if (repeatedEntry) {
+                    throw new ConflictException('genre name already registered');
+                }
+
+                const updatedGenre = Object.assign(genreFound, genre);
+
+                return this.genreRepository.save(updatedGenre);
+            }
         }
     }
 }
