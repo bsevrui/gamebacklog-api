@@ -1,13 +1,17 @@
 import { Injectable, HttpException, HttpStatus, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Game } from './game.entity';
-import { Repository } from 'typeorm';
+import { Genre } from 'src/genres/genre.entity';
+import { Repository, In } from 'typeorm';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
 
 @Injectable()
 export class GamesService {
-    constructor(@InjectRepository(Game) private gameRepository: Repository<Game>) {}
+    constructor(
+        @InjectRepository(Game) private gameRepository: Repository<Game>,
+        @InjectRepository(Genre) private genreRepository: Repository<Genre>
+    ) {}
 
     async createGame(game: CreateGameDto) {
         const gameFound = await this.gameRepository.findOne({
@@ -127,7 +131,8 @@ export class GamesService {
         const gameFound = await this.gameRepository.findOne({
             where: {
                 id: id
-            }
+            },
+            relations: ['genres']
         });
 
         if (!gameFound) {
@@ -145,9 +150,29 @@ export class GamesService {
                 }
             }
 
-            const updatedGame = Object.assign(gameFound, game);
+            if (game.title) {
+                gameFound.title = game.title;
+            }
 
-            return this.gameRepository.save(updatedGame);
+            if (game.type) {
+                gameFound.type = game.type;
+            }
+
+            if (game.cover) {
+                gameFound.cover = game.cover;
+            }
+
+            if (game.genres) {
+                const genres = await this.genreRepository.find({
+                    where: {
+                        id: In(game.genres),
+                    },
+                });
+
+                gameFound.genres = genres;
+            }
+
+            return this.gameRepository.save(gameFound);
         }
     }
 }
