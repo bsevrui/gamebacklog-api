@@ -17,7 +17,7 @@ export class GenresService {
         });
         
         if (genreFound) {
-            return new HttpException('Genre already exist', HttpStatus.CONFLICT);
+            throw new ConflictException('genre already registered');
         } else {
             const newGenre = this.genreRepository.create(genre);
             return this.genreRepository.save(newGenre);
