@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Game } from './game.entity';
 import { Repository } from 'typeorm';
@@ -17,7 +17,7 @@ export class GamesService {
         });
 
         if (gameFound) {
-            return new HttpException('Game already exist', HttpStatus.CONFLICT);
+            throw new ConflictException('game already registered');
         } else {
             const newGame = this.gameRepository.create(game);
             return this.gameRepository.save(newGame);
@@ -131,9 +131,22 @@ export class GamesService {
         });
 
         if (!gameFound) {
-            return new HttpException('Game Not Found', HttpStatus.NOT_FOUND);
+            throw new HttpException('Game not found', HttpStatus.NOT_FOUND);
         } else {
+            if (game.title && game.title != gameFound.title) {
+                const repeatedEntry = await this.gameRepository.findOne({
+                    where: {
+                        title: game.title
+                    }
+                });
+
+                if (repeatedEntry) {
+                    throw new ConflictException('game title already registared');
+                }
+            }
+
             const updatedGame = Object.assign(gameFound, game);
+
             return this.gameRepository.save(updatedGame);
         }
     }
