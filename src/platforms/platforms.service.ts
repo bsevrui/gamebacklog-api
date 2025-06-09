@@ -17,7 +17,7 @@ export class PlatformsService {
         });
 
         if (platformFound) {
-            throw new ConflictException('platform already registerd');
+            throw new ConflictException('platform already registered');
         } else {
             const newPlatform = this.platformRepository.create(platform);
             return this.platformRepository.save(newPlatform);
