@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 04, 2025 at 11:28 PM
+-- Generation Time: Jun 09, 2025 at 02:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -50,21 +50,23 @@ INSERT INTO `gamegenres` (`genre`, `game`) VALUES
 (2, 133),
 (3, 329),
 (3, 372),
+(3, 403),
+(3, 404),
 (4, 91),
 (4, 372),
 (5, 57),
 (5, 66),
 (5, 247),
 (5, 249),
-(5, 284),
 (5, 341),
-(5, 398),
-(5, 399),
 (6, 75),
 (6, 227),
 (6, 228),
+(8, 3),
+(8, 11),
 (8, 55),
 (8, 57),
+(8, 208),
 (8, 227),
 (8, 228),
 (8, 244),
@@ -75,6 +77,7 @@ INSERT INTO `gamegenres` (`genre`, `game`) VALUES
 (8, 288),
 (8, 398),
 (8, 399),
+(10, 11),
 (10, 57),
 (10, 227),
 (10, 228),
@@ -86,13 +89,15 @@ INSERT INTO `gamegenres` (`genre`, `game`) VALUES
 (10, 398),
 (10, 399),
 (11, 278),
+(11, 279),
 (11, 317),
 (13, 84),
 (14, 113),
 (16, 335),
-(19, 11),
+(20, 3),
 (20, 4),
 (20, 57),
+(20, 208),
 (20, 221),
 (20, 247),
 (20, 249),
@@ -115,15 +120,22 @@ INSERT INTO `gamegenres` (`genre`, `game`) VALUES
 (33, 240),
 (34, 123),
 (35, 341),
+(35, 403),
+(35, 404),
 (36, 393),
 (37, 367),
+(38, 3),
+(38, 208),
 (38, 350),
 (39, 353),
 (40, 268),
 (41, 397),
+(42, 11),
 (42, 284),
 (42, 398),
-(42, 399);
+(42, 399),
+(48, 3),
+(48, 208);
 
 -- --------------------------------------------------------
 
@@ -286,7 +298,6 @@ INSERT INTO `games` (`id`, `title`, `type`, `cover`) VALUES
 (146, 'Tales of Zestiria', 'Game', NULL),
 (147, 'The Outer World', 'Game', NULL),
 (148, '8BitBoy', 'Game', NULL),
-(149, 'Archeblade', 'Game', NULL),
 (150, 'Assassin\'s Creed IV: Black Flag', 'Game', NULL),
 (151, 'Blasphemus', 'Game', NULL),
 (152, 'Diablo III', 'Game', NULL),
@@ -412,7 +423,7 @@ INSERT INTO `games` (`id`, `title`, `type`, `cover`) VALUES
 (276, 'Mario Kart DS', 'Game', NULL),
 (277, 'Mario Kart Wii', 'Game', NULL),
 (278, 'Animal Crossing: Wild World', 'Game', NULL),
-(279, 'Animal Crossing: Let\'s Go to the City (Animal Crossing: City Folk)', 'Game', NULL),
+(279, 'Animal Crossing: City Folk (Animal Crossing: Let\'s Go to the City)', 'Game', NULL),
 (280, 'Animal Crossing: New Leaf', 'Game', NULL),
 (281, 'Animal Crossing: New Horizons', 'Game', NULL),
 (282, 'Pokémon Sword & Shield', 'Game', NULL),
@@ -422,7 +433,7 @@ INSERT INTO `games` (`id`, `title`, `type`, `cover`) VALUES
 (286, 'Nioh: Defiant Honor', 'DLC/Expansion', NULL),
 (287, 'Nioh: Bloodshed\'s End', 'DLC/Expansion', NULL),
 (288, 'DOOM: Eternal', 'Game', NULL),
-(291, 'Devil May Cry 5', 'Game', NULL),
+(291, 'Devil May Cry V', 'Game', NULL),
 (292, 'BioShock', 'Game', NULL),
 (293, 'BioShock 2', 'Game', NULL),
 (294, 'BioShock Remastered', 'Game', NULL),
@@ -468,7 +479,7 @@ INSERT INTO `games` (`id`, `title`, `type`, `cover`) VALUES
 (336, 'Horizon Zero Dawn: The Frozen Wilds', 'DLC/Expansion', NULL),
 (337, 'Horizon Forbidden West', 'Game', NULL),
 (340, 'Assassin\'s Creed: Valhalla', 'Game', NULL),
-(341, 'Baldur\'s Gate III', 'Game', NULL),
+(341, 'Baldur\'s Gate III', 'Game', 'https://bg3.wiki/w/images/8/89/Baldur%27s_Gate_3_Cover_Art.webp'),
 (342, 'Call of Duty: Black Ops Cold War [Multiplayer]', 'Game', NULL),
 (343, 'Among Us', 'Game', NULL),
 (344, 'Fall Guys', 'Game', NULL),
@@ -524,7 +535,10 @@ INSERT INTO `games` (`id`, `title`, `type`, `cover`) VALUES
 (396, 'Fahrenheit 451', 'Game', NULL),
 (397, 'Preguntados', 'Game', NULL),
 (398, 'Elden Ring', 'Game', NULL),
-(399, 'Elden Ring - Shadow of the Erdtree', 'DLC/Expansion', NULL);
+(399, 'Elden Ring - Shadow of the Erdtree', 'DLC/Expansion', NULL),
+(400, 'Archeblade', 'Game', NULL),
+(403, 'Baldur\'s Gate', 'Game', NULL),
+(404, 'Baldur\'s Gate II', 'Game', NULL);
 
 -- --------------------------------------------------------
 
@@ -577,7 +591,10 @@ INSERT INTO `genres` (`id`, `name`, `description`) VALUES
 (39, 'Horror', NULL),
 (40, 'Party', NULL),
 (41, 'Trivia', NULL),
-(42, 'Souls', 'Also includes Soulslike');
+(42, 'Soulsborne', 'Refers to FromSoftware\'s Souls Series & Bloodborne'),
+(45, 'Roguelite', NULL),
+(46, 'Soulslike', 'Games inspired by FromSoftware\'s Souls series'),
+(48, 'Parkour', NULL);
 
 -- --------------------------------------------------------
 
@@ -598,7 +615,7 @@ CREATE TABLE `platforms` (
 --
 
 INSERT INTO `platforms` (`id`, `name`, `releaseDate`, `detail`, `picture`) VALUES
-(1, 'Sony\'s PlayStation 4 Family', '2014-02-22', 'Includes: PlayStation 4, PlayStation 4 Slim & PlayStation 4 Pro', NULL),
+(1, 'Sony\'s PlayStation 4 Family', '2014-02-22', 'Includes: PS4, PS4 Slim & PS4 Pro', NULL),
 (2, 'Microsoft\'s Windows', '1985-11-20', 'Includes all versions of Microsoft\'s Windows', NULL),
 (3, 'Microsoft\'s Xbox One Family', '2013-11-22', 'Includes: Xbox One, Xbox One S & Xbox One X', NULL),
 (4, 'Nintendo\'s 3DS Family', '2011-02-26', 'Includes: 3DS, 3DS XL, 2DS, New 3DS, New 3DS XL & New 2DS', NULL),
@@ -608,16 +625,16 @@ INSERT INTO `platforms` (`id`, `name`, `releaseDate`, `detail`, `picture`) VALUE
 (8, 'Sony\'s PlayStation Portable Family', '2004-12-12', 'Includes: PSP, PSP Slime & Lite, PSP 3000, PSP Go & PSP E1000', NULL),
 (9, 'Nintendo\'s Wii Family', '2006-12-02', 'Includes: Wii, Wii Family & Wii Mini', NULL),
 (10, 'Nintendo\'s WiiU', '2012-12-08', NULL, NULL),
-(11, 'Nintendo\'s GameCube', '2001-09-14', 'Includes Panasonic Q (also known as GameQ)', NULL),
+(11, 'Nintendo\'s GameCube', '2001-09-14', 'Includes Panasonic Q (aka GameQ)', NULL),
 (12, 'Google\'s Android', '2008-09-23', 'Includes all versions of Android', NULL),
 (13, 'Apple\'s iOS/iPadOS', '2007-06-29', 'Includes all versions of iOS & iPadOS', NULL),
 (14, 'Sony\'s PlayStation 3 Family', '2006-11-11', 'Includes: PS3, PS3 Slim & PS3 Super Slim', NULL),
 (15, 'Sony\'s PlayStation Vita Family', '2011-12-17', 'Includes: PS Vita, PS Vita Slim & PS Vita TV', NULL),
 (16, 'Microsoft\'s Xbox 360 Family', '2005-11-22', 'Includes: Xbox 360 Standar, Pro, Core, Arcade, Premium, Elite, S & E', NULL),
-(17, 'Sony\'s PlayStation 5 Family', '2020-11-12', 'Includes: PlayStation 5 & PlayStation 5 Digital Edition', NULL),
+(17, 'Sony\'s PlayStation 5 Family', '2020-11-12', 'Includes: PS5, PS5 Digital, PS5 Slim, PS5 Digital Slim & PS5 Pro', NULL),
 (18, 'Microsoft\'s Xbox Series Family', '2020-11-11', 'Includes: Xbox Series X & Xbox Series S', NULL),
-(20, 'Linux', '1991-01-01', 'Includes all Linux distros/versions (SteamOS, Pop! OS, Ubuntu, Archlinux, Manjaro, Debian, ...)', NULL),
-(21, 'SEGA\'s Sega Saturn', '1994-11-21', NULL, NULL),
+(20, 'Linux', '1991-01-01', 'Includes all Linux distros', NULL),
+(21, 'SEGA\'s Saturn', '1994-11-21', NULL, NULL),
 (22, 'Sony\'s PlayStation', '1994-11-03', NULL, NULL),
 (23, 'Nintendo\'s Nintendo 64', '1996-06-23', NULL, NULL),
 (24, 'Nintendo\'s Gameboy Color', '1998-10-22', NULL, NULL),
@@ -625,7 +642,9 @@ INSERT INTO `platforms` (`id`, `name`, `releaseDate`, `detail`, `picture`) VALUE
 (26, 'SEGA\'s Dreamcast', '1998-11-27', NULL, NULL),
 (27, 'Sony\'s PlayStation 2 Family', '2000-03-04', 'Includes: PS2 Fat & PS2 Slim', NULL),
 (28, 'Microsoft\'s Xbox', '2001-11-15', NULL, NULL),
-(29, 'Nintendo\'s Gameboy Advance Family', '2001-03-21', 'Includes: Gameboy Advance & Gameboy Advance SP', NULL);
+(29, 'Nintendo\'s Gameboy Advance Family', '2001-03-21', 'Includes: Gameboy Advance & Gameboy Advance SP', NULL),
+(30, 'Nintendo\'s Switch 2', '2025-06-05', NULL, NULL),
+(32, 'Nintendo Entertainment System', '1983-07-15', 'AKA: NES & Famicom', NULL);
 
 -- --------------------------------------------------------
 
@@ -804,7 +823,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `role`, `registrationDate`, `birthdate`, `firstName`, `lastName`, `profilePicture`) VALUES
 (16, 'saltman@test.com', 'saltman', '$2b$10$Ge1Gd9loGgSJzzeKqRU5e.SbCn.CFc3zvdkoU..QwDsCE.5FPv8P.', 'USER', '2025-05-28 19:00:06', '1999-02-23', NULL, NULL, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVOf-Aqlh4Szj2z4z_jTcecVgDKXdNDWefuA&s'),
-(17, 'user@test.com', 'user', '$2b$10$nrmegSAAwv40VtlN9nVvS.nUTMaeoVsZDJwkT5VagIAztvbxLbPim', 'USER', '2025-05-28 19:01:09', '2025-05-28', NULL, NULL, NULL);
+(17, 'user@test.com', 'user1', '$2b$10$nrmegSAAwv40VtlN9nVvS.nUTMaeoVsZDJwkT5VagIAztvbxLbPim', 'USER', '2025-05-28 19:01:09', '2025-05-28', 'User', 'Testing', 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D'),
+(20, 'admin@test.com', 'admin', '$2b$10$NExCtXdl0r0sHq1/s14ZxOiYIKCJMbJzJUVeqpnY6uzWIl5Zz9cFO', 'ADMIN', '2025-06-06 17:59:54', '2025-06-06', 'Victoria', NULL, 'https://media.rerecruitment.com/uploads/2024/04/iStock-1466985705.jpg?w=2000&h=1333&scale.option=fill&cw=2000&ch=1333&cx=center&cy=center');
 
 -- --------------------------------------------------------
 
@@ -842,7 +862,12 @@ INSERT INTO `usersgames` (`userId`, `gameId`, `status`, `score`, `installed`, `p
 (17, 249, 'Plan-To-Play', NULL, 0, 0),
 (17, 284, 'Dropped', NULL, 0, 0),
 (17, 341, 'Completed', 9, 0, 0),
-(17, 372, 'Played', 6, 0, 0);
+(17, 372, 'Played', 6, 0, 0),
+(20, 150, 'On-Hold', NULL, 0, 0),
+(20, 208, 'Completed', 8, 0, 0),
+(20, 341, 'Plan-To-Play', NULL, 1, 0),
+(20, 343, 'Played', 6, 0, 0),
+(20, 392, 'Dropped', NULL, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -907,25 +932,25 @@ ALTER TABLE `usersgames`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=400;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=405;
 
 --
 -- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `platforms`
 --
 ALTER TABLE `platforms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
