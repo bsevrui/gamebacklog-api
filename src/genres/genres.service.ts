@@ -81,11 +81,17 @@ export class GenresService {
                 if (repeatedEntry) {
                     throw new ConflictException('genre name already registered');
                 }
-
-                const updatedGenre = Object.assign(genreFound, genre);
-
-                return this.genreRepository.save(updatedGenre);
             }
+
+            if (genre.name) {
+                genreFound.name = genre.name;
+            }
+
+            if (genre.description) {
+                genreFound.description = genre.description;
+            }
+
+            return this.genreRepository.save(genreFound);
         }
     }
 }
