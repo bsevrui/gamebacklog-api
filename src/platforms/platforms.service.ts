@@ -83,11 +83,25 @@ export class PlatformsService {
                 if (repeatedEntry) {
                     throw new ConflictException('platform name already registered');
                 }
-
-                const updatedPlatform = Object.assign(platformFound, platform);
-
-                return this.platformRepository.save(updatedPlatform);
             }
+
+            if (platform.name) {
+                platformFound.name = platform.name;
+            }
+
+            if (platform.releaseDate) {
+                platformFound.releaseDate = platform.releaseDate;
+            }
+
+            if (platform.detail) {
+                platformFound.detail = platform.detail;
+            }
+
+            if (platform.picture) {
+                platform.picture = platform.picture;
+            }
+
+            return this.platformRepository.save(platformFound);
         }
     }
 }
