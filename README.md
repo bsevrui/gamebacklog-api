@@ -1,7 +1,7 @@
 # GameBacklog API
 
 ## Versionado
-Versión: ```0.0.25.6.8```
+Versión: ```0.0.25.6.9```
 
 ## Descripción
 API Diseñada para el PFG de DAW, construida en _NestJS_
